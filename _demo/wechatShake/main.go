@@ -59,89 +59,10 @@ func initLog() {
 func initGift() {
 	giftList = make([]*gift, 5)
 
-	g1 := gift{
-		id:       1,
-		name:     "mobile",
-		pic:      "",
-		link:     "",
-		gType:    giftTypeRealLarge,
-		data:     "",
-		dataList: nil,
-		total:    20000,
-		left:     20000,
-		inUse:    true,
-		rate:     10000,
-		rateMin:  0,
-		rateMax:  0,
-	}
 	giftList[0] = &g1
-
-	g2 := gift{
-		id:       2,
-		name:     "charge",
-		pic:      "",
-		link:     "",
-		gType:    giftTypeRealSmall,
-		data:     "",
-		dataList: nil,
-		total:    5,
-		left:     5,
-		inUse:    false,
-		rate:     10,
-		rateMin:  0,
-		rateMax:  0,
-	}
 	giftList[1] = &g2
-
-	g3 := gift{
-		id:       3,
-		name:     "Qp",
-		pic:      "",
-		link:     "",
-		gType:    giftTypeCoupon,
-		data:     "mall-c-2018",
-		dataList: nil,
-		total:    50,
-		left:     50,
-		inUse:    false,
-		rate:     500,
-		rateMin:  0,
-		rateMax:  0,
-	}
 	giftList[2] = &g3
-
-	g4 := gift{
-		id:       4,
-		name:     "Qp50",
-		pic:      "",
-		link:     "",
-		gType:    giftTypeCoupon,
-		data:     "",
-		dataList: []string{"c01", "c02", "c03", "c04", "c05", "c06", "c07", "c08", "c09", "c10", "c11"},
-		total:    10,
-		left:     10,
-		inUse:    false,
-		rate:     100,
-		rateMin:  0,
-		rateMax:  0,
-	}
 	giftList[3] = &g4
-
-	g5 := gift{
-		id:       5,
-		name:     "coin",
-		pic:      "",
-		link:     "",
-		gType:    giftTypeCoin,
-		data:     "10b",
-		dataList: nil,
-		total:    5,
-		left:     5,
-		inUse:    false,
-		rate:     5000,
-		rateMin:  0,
-		rateMax:  0,
-	}
 	giftList[4] = &g5
 
 	rateStart := 0
