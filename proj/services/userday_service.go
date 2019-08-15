@@ -4,12 +4,7 @@
 package services
 
 import (
-	"fmt"
 	"lottery/proj/models"
-	"strconv"
-	"time"
-
-	"imooc.com/lottery/datasource"
 )
 
 type UserdayService interface {
@@ -25,55 +20,55 @@ type UserdayService interface {
 }
 
 type userdayService struct {
-	dao *dao.UserdayDao
+	// dao *dao.UserdayDao
 }
 
-func NewUserdayService() UserdayService {
-	return &userdayService{
-		dao: dao.NewUserdayDao(datasource.InstanceDbMaster()),
-	}
-}
+// func NewUserdayService() UserdayService {
+// 	return &userdayService{
+// 		dao: dao.NewUserdayDao(datasource.InstanceDbMaster()),
+// 	}
+// }
 
-func (s *userdayService) GetAll(page, size int) []models.LtUserday {
-	return s.dao.GetAll(page, size)
-}
+// func (s *userdayService) GetAll(page, size int) []models.LtUserday {
+// 	return s.dao.GetAll(page, size)
+// }
 
-func (s *userdayService) CountAll() int64 {
-	return s.dao.CountAll()
-}
+// func (s *userdayService) CountAll() int64 {
+// 	return s.dao.CountAll()
+// }
 
-func (s *userdayService) Search(uid, day int) []models.LtUserday {
-	return s.dao.Search(uid, day)
-}
+// func (s *userdayService) Search(uid, day int) []models.LtUserday {
+// 	return s.dao.Search(uid, day)
+// }
 
-func (s *userdayService) Count(uid, day int) int {
-	return s.dao.Count(uid, day)
-}
+// func (s *userdayService) Count(uid, day int) int {
+// 	return s.dao.Count(uid, day)
+// }
 
-func (s *userdayService) Get(id int) *models.LtUserday {
-	return s.dao.Get(id)
-}
+// func (s *userdayService) Get(id int) *models.LtUserday {
+// 	return s.dao.Get(id)
+// }
 
-//func (s *userdayService) Delete(id int) error {
-//	return s.dao.Delete(id)
-//}
+// //func (s *userdayService) Delete(id int) error {
+// //	return s.dao.Delete(id)
+// //}
 
-func (s *userdayService) Update(data *models.LtUserday, columns []string) error {
-	return s.dao.Update(data, columns)
-}
+// func (s *userdayService) Update(data *models.LtUserday, columns []string) error {
+// 	return s.dao.Update(data, columns)
+// }
 
-func (s *userdayService) Create(data *models.LtUserday) error {
-	return s.dao.Create(data)
-}
+// func (s *userdayService) Create(data *models.LtUserday) error {
+// 	return s.dao.Create(data)
+// }
 
-func (s *userdayService) GetUserToday(uid int) *models.LtUserday {
-	y, m, d := time.Now().Date()
-	strDay := fmt.Sprintf("%d%02d%02d", y, m, d)
-	day, _ := strconv.Atoi(strDay)
-	list := s.dao.Search(uid, day)
-	if list != nil && len(list) > 0 {
-		return &list[0]
-	} else {
-		return nil
-	}
-}
+// func (s *userdayService) GetUserToday(uid int) *models.LtUserday {
+// 	y, m, d := time.Now().Date()
+// 	strDay := fmt.Sprintf("%d%02d%02d", y, m, d)
+// 	day, _ := strconv.Atoi(strDay)
+// 	list := s.dao.Search(uid, day)
+// 	if list != nil && len(list) > 0 {
+// 		return &list[0]
+// 	} else {
+// 		return nil
+// 	}
+// }

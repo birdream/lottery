@@ -10,16 +10,16 @@ import (
 	"github.com/gomodule/redigo/redis"
 )
 
-var redisLock sync.Mutex
+var rdsLock sync.Mutex
 var cacheInstance *RedisConn
 
-// RedisConn 封装成一个redis资源池
+// 封装成一个redis资源池
 type RedisConn struct {
 	pool      *redis.Pool
 	showDebug bool
 }
 
-// Do 对外只有一个命令，封装了一个redis的命令
+// 对外只有一个命令，封装了一个redis的命令
 func (rds *RedisConn) Do(commandName string, args ...interface{}) (reply interface{}, err error) {
 	conn := rds.pool.Get()
 	defer conn.Close()
@@ -32,7 +32,6 @@ func (rds *RedisConn) Do(commandName string, args ...interface{}) (reply interfa
 			log.Println("rdshelper Do", err, e)
 		}
 	}
-
 	t2 := time.Now().UnixNano()
 	if rds.showDebug {
 		fmt.Printf("[redis] [info] [%dus]cmd=%s, err=%s, args=%v, reply=%s\n", (t2-t1)/1000, commandName, err, args, reply)
@@ -40,18 +39,18 @@ func (rds *RedisConn) Do(commandName string, args ...interface{}) (reply interfa
 	return reply, err
 }
 
-// ShowDebug 设置是否打印操作日志
+// 设置是否打印操作日志
 func (rds *RedisConn) ShowDebug(b bool) {
 	rds.showDebug = b
 }
 
-// InstanceCache 得到唯一的redis缓存实例
+// 得到唯一的redis缓存实例
 func InstanceCache() *RedisConn {
 	if cacheInstance != nil {
 		return cacheInstance
 	}
-	redisLock.Lock()
-	defer redisLock.Unlock()
+	rdsLock.Lock()
+	defer rdsLock.Unlock()
 
 	if cacheInstance != nil {
 		return cacheInstance
@@ -59,11 +58,11 @@ func InstanceCache() *RedisConn {
 	return NewCache()
 }
 
-// NewCache 重新实例化
+// 重新实例化
 func NewCache() *RedisConn {
 	pool := redis.Pool{
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", fmt.Sprintf("%s:%d", conf.RedisCache.Host, conf.RedisCache.Port))
+			c, err := redis.Dial("tcp", fmt.Sprintf("%s:%d", conf.RdsCache.Host, conf.RdsCache.Port))
 			if err != nil {
 				log.Fatal("rdshelper.NewCache Dial error ", err)
 				return nil, err
