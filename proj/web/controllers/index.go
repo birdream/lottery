@@ -3,8 +3,6 @@ package controllers
 import (
 	"lottery/proj/models"
 	"lottery/proj/services"
-	"strconv"
-	"time"
 
 	"github.com/kataras/iris"
 )
@@ -66,18 +64,18 @@ func (c *IndexController) GetMyprize() map[string]interface{} {
 	rs["code"] = 0
 	rs["msg"] = ""
 	// 验证登录
-	loginuser := comm.GetLoginUser(c.Ctx.Request())
-	if loginuser == nil || loginuser.Uid < 1 {
-		rs["code"] = 101
-		rs["msg"] = "请先登录，再来抽奖"
-		return rs
-	}
-	// 只读取出来最新的100次中奖记录
-	list := c.ServiceResult.SearchByUser(loginuser.Uid, 1, 100)
-	rs["prize_list"] = list
-	// 今天抽奖次数
-	day, _ := strconv.Atoi(comm.FormatFromUnixTimeShort(time.Now().Unix()))
-	num := c.ServiceUserday.Count(loginuser.Uid, day)
-	rs["prize_num"] = conf.UserPrizeMax - num
+	// loginuser := comm.GetLoginUser(c.Ctx.Request())
+	// if loginuser == nil || loginuser.Uid < 1 {
+	// 	rs["code"] = 101
+	// 	rs["msg"] = "请先登录，再来抽奖"
+	// 	return rs
+	// }
+	// // 只读取出来最新的100次中奖记录
+	// list := c.ServiceResult.SearchByUser(loginuser.Uid, 1, 100)
+	// rs["prize_list"] = list
+	// // 今天抽奖次数
+	// day, _ := strconv.Atoi(comm.FormatFromUnixTimeShort(time.Now().Unix()))
+	// num := c.ServiceUserday.Count(loginuser.Uid, day)
+	// rs["prize_num"] = conf.UserPrizeMax - num
 	return rs
 }

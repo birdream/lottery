@@ -9,8 +9,9 @@ import (
 	"lottery/proj/models"
 	"sync"
 
+	"lottery/proj/comm"
+
 	"github.com/gomodule/redigo/redis"
-	"imooc.com/lottery/comm"
 	"imooc.com/lottery/datasource"
 )
 
